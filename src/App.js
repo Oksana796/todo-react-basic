@@ -14,7 +14,7 @@ export default function App() {
 
   const addNewTask = (e) => {
     e.preventDefault();
-    setTasks(tasks.concat({ id: id, item: newTask }));
+    setTasks(tasks.concat({ id: id++, item: newTask }));
     setNewTask("");
   };
 
@@ -33,7 +33,16 @@ export default function App() {
       <div>
         <ul>
           {tasks.map(({ id, item }) => (
-            <li key={id}>{item}</li>
+            <li key={id}>
+              <span>{item}</span>
+              <button
+                onClick={() => {
+                  setTasks(tasks.filter((task) => task.id !== id));
+                }}
+              >
+                Delete
+              </button>
+            </li>
           ))}
         </ul>
       </div>
